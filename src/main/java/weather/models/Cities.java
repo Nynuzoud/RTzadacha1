@@ -5,7 +5,7 @@ package weather.models;
  */
 public class Cities {
     private int id;
-    private int cityName;
+    private String cityName;
 
     public int getId() {
         return id;
@@ -15,11 +15,11 @@ public class Cities {
         this.id = id;
     }
 
-    public int getCityName() {
+    public String getCityName() {
         return cityName;
     }
 
-    public void setCityName(int cityName) {
+    public void setCityName(String cityName) {
         this.cityName = cityName;
     }
 }

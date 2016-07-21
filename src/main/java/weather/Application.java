@@ -1,14 +1,9 @@
 package weather;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import weather.DAO.Cities.CitiesDAO;
-import weather.DAO.Weather.WeatherDAO;
-import weather.DAO.WeatherTypes.WeatherTypesDAO;
-import weather.models.Weather;
-
-import java.util.List;
 
 /**
  * Created by Sergey on 20.07.2016. This is a test project.
@@ -19,7 +14,7 @@ public class Application {
     public static void main(String[] args) {
         ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
 
-        WeatherDAO weatherDAO = (WeatherDAO) context.getBean("weatherDAO");
+        /*WeatherDAO weatherDAO = (WeatherDAO) context.getBean("weatherDAO");
 
         weatherDAO.insertWeatherForCity(1468929690, 1, 3);
 
@@ -53,8 +48,8 @@ public class Application {
             System.out.println(item.getTime());
             System.out.println(item.getCity());
             System.out.println(item.getWheather());
-        });
+        });*/
 
-        //SpringApplication.run(Main.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }

@@ -1,5 +1,7 @@
 package weather.DAO.WeatherTypes;
 
+import weather.models.WeatherTypes;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,13 +21,14 @@ public class JDBCWeatherTypesDAO implements WeatherTypesDAO {
     }
 
     @Override
-    public List<String> insertNewWeatherAndGetListOfWeather(String weatherTypeName) {
-        List<String> list = new ArrayList<>();
+    public List<WeatherTypes> insertNewWeatherAndGetListOfWeather(String weatherTypeName) {
+        List<WeatherTypes> list = new ArrayList<>();
 
         String sqlInsert = "INSERT INTO test.weather_types (weather_types.weather_name) VALUES (?);";
         String sqlSelect = "SELECT * FROM test.weather_types;";
 
         Connection connection = null;
+
         try {
             connection = dataSource.getConnection();
 
@@ -48,7 +51,10 @@ public class JDBCWeatherTypesDAO implements WeatherTypesDAO {
             ResultSet resultSet = preparedStatementSelect.executeQuery();
 
             while (resultSet.next()) {
-                list.add(resultSet.getString("weather_name"));
+                WeatherTypes weatherTypes = new WeatherTypes();
+                weatherTypes.setId(resultSet.getInt("id"));
+                weatherTypes.setWeatherName(resultSet.getString("weather_name"));
+                list.add(weatherTypes);
             }
             preparedStatementSelect.close();
             resultSet.close();

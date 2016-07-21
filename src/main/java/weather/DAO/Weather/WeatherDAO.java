@@ -14,5 +14,7 @@ public interface WeatherDAO {
 
     List<Weather> getCityWeather(int id);
 
+    Weather getWeatherForAnHour(long timestamp, int cityId);
+
     void insertWeatherForCity(long timestamp, int cityId, int weatherId);
 }

@@ -5,7 +5,7 @@ package weather.models;
  */
 public class WeatherTypes {
     private int id;
-    private int weatherName;
+    private String weatherName;
 
     public int getId() {
         return id;
@@ -15,11 +15,11 @@ public class WeatherTypes {
         this.id = id;
     }
 
-    public int getWeatherName() {
+    public String getWeatherName() {
         return weatherName;
     }
 
-    public void setWeatherName(int weatherName) {
+    public void setWeatherName(String weatherName) {
         this.weatherName = weatherName;
     }
 }

@@ -1,5 +1,7 @@
 package weather.DAO.Cities;
 
+import weather.models.Cities;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,10 +21,10 @@ public class JDBCCitiesDAO implements CitiesDAO {
     }
 
     @Override
-    public List<String> getAllCities() {
-        List<String> list = new ArrayList<>();
+    public List<Cities> getAllCities() {
+        List<Cities> list = new ArrayList<>();
 
-        String sql = "SELECT cities.city_name FROM test.cities;";
+        String sql = "SELECT * FROM test.cities;";
 
         Connection connection = null;
 
@@ -33,7 +35,10 @@ public class JDBCCitiesDAO implements CitiesDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
-                list.add(resultSet.getString("city_name"));
+                Cities cities = new Cities();
+                cities.setId(resultSet.getInt("id"));
+                cities.setCityName(resultSet.getString("city_name"));
+                list.add(cities);
             }
             preparedStatement.close();
             resultSet.close();

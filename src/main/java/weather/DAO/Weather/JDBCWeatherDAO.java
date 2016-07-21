@@ -133,6 +133,49 @@ public class JDBCWeatherDAO implements WeatherDAO {
         return list;
     }
 
+    @Override
+    public Weather getWeatherForAnHour(long timestamp, int cityId) {
+        long roundedTimestamp = (timestamp - (timestamp % 3600)) + 3600;
+
+        String sql = "SELECT weather.id, weather.time, cities.city_name, weather_types.weather_name " +
+                "FROM test.weather, test.cities, test.weather_types " +
+                "WHERE weather.id_city = cities.id AND " +
+                "weather.id_weather = weather_types.id AND " +
+                "weather.time = ? AND " +
+                "weather.id_city = ?;";
+
+        Connection connection = null;
+        Weather weather = null;
+        try {
+            connection = dataSource.getConnection();
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, roundedTimestamp);
+            preparedStatement.setInt(2, cityId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                weather = setDataToWeatherObject(new Weather(), resultSet);
+            }
+
+            preparedStatement.close();
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return weather;
+    }
+
     private Weather setDataToWeatherObject(Weather weather, ResultSet resultSet) throws SQLException {
         weather.setId(resultSet.getLong("id"));
         weather.setTime(service.timestampToDateString(resultSet.getLong("time")));
