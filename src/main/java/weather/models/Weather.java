@@ -7,7 +7,7 @@ public class Weather {
     private long id;
     private String time;
     private String city;
-    private String wheather;
+    private String weather;
 
     public long getId() {
         return id;
@@ -33,11 +33,11 @@ public class Weather {
         this.city = city;
     }
 
-    public String getWheather() {
-        return wheather;
+    public String getWeather() {
+        return weather;
     }
 
-    public void setWheather(String wheather) {
-        this.wheather = wheather;
+    public void setWeather(String weather) {
+        this.weather = weather;
     }
 }

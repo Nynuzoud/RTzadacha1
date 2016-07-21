@@ -180,7 +180,7 @@ public class JDBCWeatherDAO implements WeatherDAO {
         weather.setId(resultSet.getLong("id"));
         weather.setTime(service.timestampToDateString(resultSet.getLong("time")));
         weather.setCity(resultSet.getString("city_name"));
-        weather.setWheather(resultSet.getString("weather_name"));
+        weather.setWeather(resultSet.getString("weather_name"));
         return weather;
     }
 
